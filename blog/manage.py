@@ -15,11 +15,11 @@ app = Flask(__name__)
 app.register_blueprint(blueprint=back_blue, url_prefix='/back')
 app.register_blueprint(blueprint=web_blue, url_prefix='/web')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@39.105.49.244:3306/blog'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = redis.Redis(host='127.0.0.1', port='6379')
+app.config['SESSION_REDIS'] = redis.Redis(host='39.105.49.244', port='6379', password='123456')
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=60)
 app.secret_key = os.urandom(24)
 
