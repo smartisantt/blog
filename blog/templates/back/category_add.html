@@ -1,0 +1,36 @@
+
+{% extends 'back/base_main.html' %}
+
+{% block title %}
+    添加文章分类
+{% endblock %}
+
+
+{% block content %}
+
+<section class="rt_wrap mCustomScrollbar">
+    
+    <div class="rt_content">
+        <div class="page_title">
+            <h2 class="fl">文章分类详情</h2>
+            <a class="fr top_rt_btn" href="goods_category_list.html">返回文章分类列表</a>
+        </div>
+        <form action="" method="post">
+            <section>
+                <ul class="ulColumn2">
+                    <li>
+                        <span class="item_name" style="width:120px;">分类名称：</span>
+                         <input type="text" name='atype'>
+                    </li>
+                    
+                    <li>
+                        <span class="item_name" style="width:120px;"></span>
+                        <input type="submit" class="link_btn"/>{{ error }}
+                    </li>
+
+                </ul>
+            </section>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="个人博客,陈伦巨个人博客,陈伦巨" />
+    <meta name="description" content="陈伦巨个人博客" />
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    {% block css %}
+    {% endblock %}
+
+
+</head>
+<body>
+    {% block header %}
+    {% endblock %}
+
+    <a href="#" class="cd-top">Top</a>
+    <article>
+        {% block aside %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+    </article>
+
+    {% block footer %}
+    {% endblock %}
+    <a href="#" class="cd-top">Top</a>
+
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

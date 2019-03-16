@@ -1,0 +1,151 @@
+{% extends 'web/base_main.html' %}
+
+{% block title %}
+首页_陈伦巨个人博客
+{% endblock %}
+
+{% block css %}
+{{ super() }}
+<link href="/static/web/css/jquery.fancybox.css">
+<link href="/static/web/css/info.css" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<script src="/static/mdeditor/js/jquery.min.js"></script>
+<script src="/static/mdeditor/lib/marked.min.js"></script>
+<script src="/static/mdeditor/lib/prettify.min.js"></script>
+<script src="/static/mdeditor/lib/raphael.min.js"></script>
+<script src="/static/mdeditor/lib/underscore.min.js"></script>
+<script src="/static/mdeditor/lib/sequence-diagram.min.js"></script>
+<script src="/static/mdeditor/lib/flowchart.min.js"></script>
+<script src="/static/mdeditor/lib/jquery.flowchart.min.js"></script>
+<script src="/static/mdeditor/js/editormd.min.js"></script>
+
+<script type="text/javascript">
+  var testEditor;
+  $(function () {
+    testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+      htmlDecode: "style,script,iframe",
+      emoji: true,
+      taskList: true,
+      tex: true, // 默认不解析
+      flowChart: true, // 默认不解析
+      sequenceDiagram: true, // 默认不解析
+      codeFold: true,
+    });
+  });
+</script>
+{% endblock %}
+
+
+
+
+{% block content %}
+<main>
+  <div class="infosbox">
+    <!--<div class="newsview">-->
+    <!--<h1 class="blog-post-title">{{article.title}}</h1>-->
+    <!--<div class="bloginfo">-->
+    <!--<ul>-->
+    <!--<li class="author">作者：<a href="/">杨青</a></li>-->
+    <!--<li class="lmname"><a href="/">{{ article.tp.t_name }}</a></li>-->
+    <!--<li class="timer">时间：{{ article.create_time }}</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="tags"><a href="/" target="_blank">个人博客</a> &nbsp; <a href="/" target="_blank">小世界</a></div>-->
+    <!--<p class="lead blog-description">{{ article.desc }}</p>-->
+    <!--<div class="news_about"><strong>简介</strong>{{ article.desc }}</div>-->
+
+    <div class="blog-header">
+      <h1 class="blog-title">{{article.title}}</h1>
+      <p class="lead blog-description">{{ article.desc }}</p>
+    </div>
+
+    <div class="blog-main">
+      <p class="blog-post-meta">{{ article.create_time }} by 陈伦巨</p>
+      <hr>
+
+      <div id="doc-content">
+        <textarea style="display:none;">{{ article.content | safe }}</textarea>
+      </div>
+
+    </div>
+
+
+    <div style="text-align:center;color: #ccc;font-size:14px;" class="">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+
+
+    <div>
+      <div id='reward'>
+        <div>如果这篇文章对您的工作和学习有所帮助，希望您能支持一下我，这就是鼓励我写作的动力。</div>
+        <button id="rewardButton" disable="enable"
+          onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+          <span>打赏</span>
+        </button>
+        <div id="QR" style="display: none;">
+
+
+          <div id="wechat" style="display: inline-block">
+            <a href="/static/web/images/wechatpay.jpg" class="fancybox fancybox.image" rel="group"><img id="wechat_qr"
+                src="/static/web/images/wechatpay.jpg" alt="刚好遇见拖拉机 微信支付"></a>
+            <p>微信支付</p>
+          </div>
+
+
+
+          <div id="alipay" style="display: inline-block">
+            <a href="/static/web/images/alipay.jpg" class="fancybox fancybox.image" rel="group"><img id="alipay_qr"
+                src="/static/web/images/alipay.jpg" alt="刚好遇见拖拉机 支付宝"></a>
+            <p>支付宝</p>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="nextinfo">
+      {% if pre_art %}
+      <p>上一篇：<a href="{{ url_for('web.info', id=pre_art.id) }}">{{ pre_art.title }}</a></p>
+      {% endif %}
+      {% if next_art %}
+      <p>下一篇：<a href="{{ url_for('web.info', id=next_art.id) }}">{{ next_art.title }}</a></p>
+      {% endif %}
+    </div>
+
+
+    <div class="news_pl">
+      <h2>文章评论</h2>
+      <!-- 来必力City版安装代码 -->
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Mjg5NS8xOTQ0MQ==">
+        <script type="text/javascript">
+          (function (d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+          })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>
+      <!-- City版安装代码已完成 -->
+    </div>
+
+  </div>
+</main>
+{% endblock %}

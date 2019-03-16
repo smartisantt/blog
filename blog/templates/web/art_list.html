@@ -1,0 +1,25 @@
+
+{% extends 'web/base_main.html' %}
+
+{% block title %}
+  首页_陈伦巨个人博客
+{% endblock %}
+
+{% block js %}
+  {{ super() }}
+
+{% endblock %}
+
+
+{% block content %}
+  <main class="r_box">
+    {% for article in articles %}
+      <div class="well">
+        <h1><a href="{{ url_for('web.info', id=article.id) }}">{{ article.title }}</a></h1>
+        <p>{{ article.desc }}</p>
+      </div>
+    {% endfor %}
+  </main>
+{% endblock %}
+
+

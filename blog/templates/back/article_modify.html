@@ -1,0 +1,78 @@
+
+{% extends 'back/base_main.html' %}
+
+{% block title %}
+    修改文章
+{% endblock %}
+
+ {% block js %}
+    {{ super() }}
+
+    <script type="text/javascript">
+      $(function() {
+          editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+              width   : "90%",
+              height  : 400,
+              syncScrolling : "single",
+              path    : "/static/mdeditor/lib/",//注意2：你的路径
+              saveHTMLToTextarea : false//注意3：这个配置，方便post提交表单
+          });
+      });
+    </script>
+ {% endblock %}
+
+    
+{% block content %}
+<section class="rt_wrap mCustomScrollbar">
+
+    <div class="rt_content">
+        <div class="page_title">
+            <h2 class="fl">商品详情</h2>
+            <a class="fr top_rt_btn" href="/goods/goods_list/">返回商品列表</a>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type='hidden' name='csrfmiddlewaretoken' value='q3tTrBuDcMhfvSS9x2u0yQAyRbboSQuyMyt42kgwgKS0rKxCv31hIWTsS3ULhZn7' />
+            <section>
+                
+                <ul class="ulColumn2">
+                    <li>
+                        <span class="item_name"  style="width:120px;">文章标题：</span>
+                        <input type="text" name="name" value="{{ art.title }}" class="textbox textbox_295" placeholder="文章标题"/>
+                        
+                    </li>
+                    <li>
+                        <span class="item_name"  style="width:120px;">文章描述：</span>
+                        <input type="text" name="desc" value="{{ art.desc }}"  class="textbox" placeholder="文章描述"/>
+                        
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:120px;">分类：</span>
+                        <select class="select" name="category">
+                                {% for type in types %}
+                                    <option value="{{ type.id }}" {% if art.type == type.id %} selected = 'selected' {% endif %}>{{ type.t_name }}</option>
+                                    <!--<option value="{{ type.id }}" >{{ type.t_name }}</option>-->
+                                {% endfor %}
+                        </select>
+                        
+                    </li>
+
+
+                    <li>
+
+                        <div id="my-editormd" style="width: 90%; height: auto;">
+                        <textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;">{{ art.content | safe }}</textarea>
+                        <!-- 注意：name属性的值-->
+                        <textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:120px;"></span>
+                        <input type="submit" value='保存提交' class="link_btn"/>
+                        {{ error }}
+                    </li>
+                </ul>
+            </section>
+        </form>
+    </div>
+</section>
+{% endblock %}
